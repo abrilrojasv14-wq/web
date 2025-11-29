@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las 3R: Reducir, Reutilizar y Reciclar</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef8f1;
+    color: #333;
+    line-height: 1.6;
+  }
+  header {
+    background-color: #2e8b57;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    transition: background 0.5s;
+  }
+  nav {
+    background: #ccead6;
+    padding: 10px;
+    text-align: center;
+  }
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #2e8b57;
+    font-weight: bold;
+  }
+  section {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  section img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+  }
+  footer {
+    text-align: center;
+    background: #2e8b57;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  table, th, td {
+    border: 1px solid #2e8b57;
+  }
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  th {
+    background: #ccead6;
+  }
+  iframe.video {
+    display: block;
+    margin: 20px auto;
+    border: 3px solid #2e8b57;
+    border-radius: 10px;
+  }
+  button {
+    background:#2e8b57; 
+    color:white; 
+    border:none; 
+    padding:10px 15px; 
+    border-radius:5px; 
+    cursor:pointer;
+  }
+  button:hover { 
+    background:#3cb371; 
+  }
+  form input, form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  form label {
+    font-weight: bold;
+  }
+  form button {
+    width: auto;
+  }
+  input:focus, textarea:focus {
+    border-color: #3cb371;
+    outline: none;
+    background-color: #eaffea;
+  }
+  /* Sidebar fija para los enlaces principales a la derecha */
+  .sidebar-enlaces {
+    position: fixed;
+    top: 40%;
+    right: 0;
+    width: 180px;
+    background: #ccead6;
+    padding: 22px 10px;
+    box-shadow: -2px 0 12px rgba(0,0,0,0.07);
+    border-radius: 8px 0 0 8px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+  }
+  .sidebar-enlaces a {
+    color: #2e8b57;
+    font-weight: bold;
+    text-decoration: none;
+    background: #eef8f1;
+    padding: 7px 15px;
+    margin: 0;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 0 5px rgba(46,139,87,0.07);
+    text-align: right;
+  }
+  .sidebar-enlaces a:hover {
+    background: #3cb371;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra lateral fija a la derecha -->
+<div class="sidebar-enlaces">
+  <a href="Beneficios.html">Beneficios</a>
+  <a href="Tips.html">Tips</a>
+  <a href="Contactos.html">Contactos</a>
+  <a href="Centros.html">Centros de Acopio</a>
+</div>
+
+<script>
+  // Mantener alert original
+  alert("Integrantes: Rojas Valdez Abril, Cruz Quecholac Edgar Alan, Hernandez Soberanes Edgar Noe y Cruz Baez Alizon Michelle");
+
+  function animarHeader() {
+    const header = document.querySelector("header");
+    let colores = ["#2e8b57", "#3cb371", "#66cdaa", "#20b2aa"];
+    let i = 0;
+    setInterval(() => {
+      header.style.backgroundColor = colores[i];
+      i = (i + 1) % colores.length;
+    }, 2000);
+  }
+  window.onload = () => {
+    animarHeader();
+    saludaUsuario();
+    mostrarAhorro();
+    actualizarFecha();
+  };
+
+  function saludaUsuario() {
+    let nombre = prompt("Por favor, ingresa tu nombre para recibir un saludo:");
+    if (nombre) {
+      let confirmar = confirm(`¿Quieres recibir un saludo personalizado, ${nombre}?`);
+      if (confirmar) {
+        alert(`¡Hola, ${nombre}! Gracias por visitar nuestra página sobre las 3R.`);
+      } else {
+        alert("No hay problema, sigue explorando la página a tu ritmo.");
+      }
+    } else {
+      alert("No ingresaste tu nombre. Puedes navegar libremente por la página.");
+    }
+  }
+
+  class Consejos {
+    constructor(){
+      this.lista = [
+        "Evita el uso de plásticos innecesarios.",
+        "Repara antes de desechar.",
+        "Clasifica la basura correctamente.",
+      ];
+    }
+    agregarConsejo(nuevoConsejo){
+      if(typeof nuevoConsejo === "string" && nuevoConsejo.length > 0){
+        this.lista.push(nuevoConsejo.trim());
+        return "Consejo agregado exitosamente.";
+      }
+      return "Consejo inválido, no se agregó.";
+    }
+    mostrarConsejoAleatorio(){
+      const index = Math.floor(Math.random() * this.lista.length);
+      return this.lista[index];
+    }
+    contarConsejos(){
+      return this.lista.length;
+    }
+  }
+  const consejos = new Consejos();
+  console.log("Consejo aleatorio del día:", consejos.mostrarConsejoAleatorio());
+
+  function calcularAhorroEnergia(consumoInicial, porcentajeReducido) {
+    if (consumoInicial < 0 || porcentajeReducido < 0 || porcentajeReducido > 100) {
+      return "Valores inválidos";
+    }
+    return consumoInicial * (porcentajeReducido / 100);
+  }
+
+  function mostrarAhorro() {
+    let consumo = 120; // consumo energético inicial en kWh
+    let porcentaje = 30; // porcentaje de reducción
+    let ahorro = calcularAhorroEnergia(consumo, porcentaje);
+    const ahorroElemento = document.getElementById("ahorro");
+    if(ahorroElemento){
+      ahorroElemento.textContent = `Si reduces tu consumo energético en un ${porcentaje}%, ahorrarás ${ahorro.toFixed(2)} kWh al mes.`;
+    }
+  }
+
+  function cambiarColorFocus(input){
+    input.style.backgroundColor = "#e0ffe0";
+  }
+  function restaurarColorBlur(input){
+    input.style.backgroundColor = "white";
+  }
+
+  function agregarSombra(img){
+    img.style.boxShadow = "0 0 15px 5px #66cdaa";
+    img.style.transform = "scale(1.05)";
+  }
+  function quitarSombra(img){
+    img.style.boxShadow = "none";
+    img.style.transform = "scale(1)";
+  }
+
+  function actualizarFecha(){
+    const fecha = new Date();
+    const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+    const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+    const footer = document.querySelector("footer p");
+    if(footer){
+      footer.textContent += ` | Fecha actual: ${fechaFormateada}`;
+    }
+  }
+</script>
+
+<header>
+  <h1>Las 3R: Reducir, Reutilizar y Reciclar</h1>
+  <p>Un estilo de vida sustentable para proteger nuestro planeta 🌍</p>
+</header>
+
+<nav>
+  <a href="#reducir">Reducir</a>
+  <a href="#reutilizar">Reutilizar</a>
+  <a href="#reciclar">Reciclar</a>
+</nav>
+
+<section>
+  <h2>¿Qué son las 3R?</h2>
+  <p>
+    Las <b>3R</b> son una estrategia ecológica que busca cambiar nuestros hábitos de consumo 
+    y manejo de residuos para disminuir el impacto ambiental. Estas letras representan:
+  </p>
+  <ul>
+    <li><b>Reducir:</b> Disminuir lo que consumimos y desechamos.</li>
+    <li><b>Reutilizar:</b> Dar un segundo uso a los objetos antes de tirarlos.</li>
+    <li><b>Reciclar:</b> Transformar residuos en nuevos productos.</li>
+  </ul>
+  <p>Aplicar las 3R ayuda a ahorrar energía, proteger la naturaleza y reducir la contaminación.</p>
+</section>
+
+<section id="reducir">
+  <h2>Reducir</h2>
+  <img src="Reducir.webp" width="500" height="300" alt="Reducir basura" 
+    onmouseover="agregarSombra(this)" onmouseout="quitarSombra(this)">
+  <p>
+    Reducir significa <b>consumir menos recursos</b> y generar menos residuos desde el inicio. 
+    Es la R más importante porque evita que los desechos lleguen a existir, lo que implica un menor gasto de energía y materias primas.
+  </p>
+  <ul>
+    <li>Evitar plásticos de un solo uso como popotes, bolsas y platos desechables.</li>
+    <li>Comprar productos con menos empaques o que utilicen empaques reciclables.</li>
+    <li>Adquirir solo lo necesario y preferir productos locales.</li>
+    <li>Ahorra agua cerrando la llave mientras te cepillas los dientes o lavas platos.</li>
+    <li>Utilizar transporte público, bicicleta o caminar en lugar del coche cuando sea posible.</li>
+  </ul>
+  <p>
+    Reducir también implica reflexionar antes de comprar: 
+    <i>¿Realmente necesito este producto? ¿Puedo evitar su uso?</i> 
+    Cada pequeño cambio reduce la huella de carbono que dejamos en el planeta.
+  </p>
+</section>
+
+<section id="reutilizar">
+  <h2>Reutilizar</h2>
+  <img src="Reutilizar.jpg" width="500" height="300" alt="Reutilizar objetos"
+    onmouseover="agregarSombra(this)" onmouseout="quitarSombra(this)">
+  <p>
+    Reutilizar significa <b>aprovechar los objetos varias veces</b> antes de desecharlos. 
+    Esto alarga la vida útil de los materiales y reduce la necesidad de producir nuevos artículos, 
+    lo que a su vez ahorra recursos naturales.
+  </p>
+  <ul>
+    <li>Reutilizar botellas, frascos y bolsas en lugar de comprar nuevas.</li>
+    <li>Reparar ropa, zapatos o aparatos electrónicos en lugar de tirarlos.</li>
+    <li>Donar ropa, juguetes y muebles que ya no uses a otras personas.</li>
+    <li>Transformar objetos viejos en manualidades o decoración (ejemplo: macetas hechas con botellas).</li>
+    <li>Utilizar hojas impresas por un solo lado como borradores.</li>
+  </ul>
+  <p>
+    La reutilización fomenta la creatividad: muchos materiales pueden tener un 
+    <b>segundo o tercer uso</b> si pensamos diferente antes de tirarlos a la basura.
+  </p>
+</section>
+
+<section id="reciclar">
+  <h2>Reciclar</h2>
+  <img src="Reciclar.jpg" width="500" height="300" alt="Reciclar materiales"
+    onmouseover="agregarSombra(this)" onmouseout="quitarSombra(this)">
+  <p>
+    Reciclar es el proceso de <b>transformar residuos en nuevos productos</b> mediante procesos industriales. 
+    Gracias al reciclaje, materiales como vidrio, papel, aluminio o plástico se reincorporan al ciclo de producción, 
+    evitando extraer más recursos de la naturaleza.
+  </p>
+  <ul>
+    <li>Separar la basura en orgánica e inorgánica para facilitar su manejo.</li>
+    <li>Clasificar papel, cartón, vidrio, aluminio, plásticos y electrónicos.</li>
+    <li>Llevar materiales reciclables a un centro de acopio autorizado.</li>
+    <li>El papel reciclado reduce la tala de árboles.</li>
+    <li>Reciclar aluminio ahorra hasta un <b>95% de la energía</b> en comparación con producirlo desde cero.</li>
+  </ul>
+  <p>
+    Reciclar requiere la participación de todos: desde separar los desechos en casa hasta que las empresas procesen los materiales para fabricar nuevos productos. 
+    <b>Reciclar es dar vida nueva a lo que consideramos basura.</b>
+  </p>
+</section>
+
+<section>
+  <h2>Comparación de las 3R</h2>
+  <table>
+    <tr>
+      <th>R</th>
+      <th>Acción</th>
+      <th>Ejemplo</th>
+    </tr>
+    <tr>
+      <td>Reducir</td>
+      <td>Consumir menos</td>
+      <td>Evitar plásticos de un solo uso</td>
+    </tr>
+    <tr>
+      <td>Reutilizar</td>
+      <td>Dar un segundo uso</td>
+      <td>Usar botellas o frascos varias veces</td>
+    </tr>
+    <tr>
+      <td>Reciclar</td>
+      <td>Transformar residuos</td>
+      <td>Convertir cartón en papel reciclado</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Video: Aprende más sobre las 3R</h2>
+  <p>Mira este video educativo que explica cómo aplicar las 3R en la vida diaria:</p>
+  <iframe class="video" width="560" height="315" 
+    src="https://www.youtube.com/embed/cvakvfXj0KE" 
+    title="Video sobre las 3R" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</section>
+
+<section>
+  <h2>¿Dónde reciclar?</h2>
+  <p>
+    Para conocer los <b>centros de acopio en la Ciudad de México</b>, visita la siguiente página:  
+  </p>
+  <a href="centros.html">Ver Centros de Acopio en CDMX</a>
+</section>
+
+<section>
+  <h2>Formulario de Contacto</h2>
+  <p>Envíanos tus dudas, comentarios o sugerencias sobre las 3R:</p>
+  <form action="#" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required
+      onfocus="cambiarColorFocus(this)" onblur="restaurarColorBlur(this)">
+    <label for="correo">Correo Electrónico:</label>
+    <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required
+      onfocus="cambiarColorFocus(this)" onblur="restaurarColorBlur(this)">
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required
+      onfocus="cambiarColorFocus(this)" onblur="restaurarColorBlur(this)"></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<section>
+  <h2>Ahorro Energético Estimado</h2>
+  <p id="ahorro">Calculando...</p>
+</section>
+
+ <footer style="text-align: center; padding: 15px; background: #2e8b57; color: white; border-radius: 10px;">
+  <p>🌍 Proyecto escolar sobre las 3R - Cuidemos el planeta 💚</p>
+  <div style="margin-top: 20px;">
+    <h3 style="margin-bottom: 8px;">Rojas Valdez Abril:</h3>
+    <div style="display: flex; justify-content: center; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 16px; color: #a8e6a2;">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="#25d366" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <circle cx="16" cy="16" r="16"/>
+        <path d="M16 4.484c-6.334 0-11.484 5.15-11.484 11.484a11.37 11.37 0 0 0 1.627 5.877l-1.367 4.982 5.112-1.341a11.488 11.488 0 0 0 5.914 1.604h.003c6.334 0 11.484-5.15 11.484-11.484 0-6.333-5.15-11.482-11.484-11.482z"/>
+      </svg>
+      <a href="https://wa.me/525571874486" target="_blank" style="color: #a8e6a2; font-weight: bold; text-decoration: none;">+52 5571874486</a>
+
+      <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <defs>
+          <radialGradient id="ig-grad" cx="0.5" cy="1" r="1">
+            <stop offset="0%" stop-color="#feda75"/>
+            <stop offset="30%" stop-color="#fa7e1e"/>
+            <stop offset="60%" stop-color="#d62976"/>
+            <stop offset="90%" stop-color="#962fbf"/>
+            <stop offset="100%" stop-color="#4f5bd5"/>
+          </radialGradient>
+        </defs>
+        <rect width="24" height="24" rx="6" fill="url(#ig-grad)"/>
+        <circle cx="12" cy="12" r="5" fill="#fff"/>
+      </svg>
+      <a href="https://instagram.com/_abrrils" target="_blank" style="color: #d877a1; font-weight: bold; text-decoration: none;">@_abrrils</a>
+
+      <a href="mailto:abril.rojas.v14@gmail.com" style="color: #a8e6a2; font-weight: bold; text-decoration: none; margin-left: 8px;">abril.rojas.v14@gmail.com</a>
+    </div>
+
+    <h3 style="margin: 20px 0 8px;">Cruz Quecholac Edgar Alan:</h3>
+    <div style="display: flex; justify-content: center; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 16px; color: #a8e6a2;">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="#25d366" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <circle cx="16" cy="16" r="16"/>
+        <path d="M16 4.484c-6.334 0-11.484 5.15-11.484 11.484a11.37 11.37 0 0 0 1.627 5.877l-1.367 4.982 5.112-1.341a11.488 11.488 0 0 0 5.914 1.604h.003c6.334 0 11.484-5.15 11.484-11.484 0-6.333-5.15-11.482-11.484-11.482z"/>
+      </svg>
+      <a href="https://wa.me/52591668909" target="_blank" style="color: #a8e6a2; font-weight: bold; text-decoration: none;">+52 591668909</a>
+
+      <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <defs>
+          <radialGradient id="ig-grad2" cx="0.5" cy="1" r="1">
+            <stop offset="0%" stop-color="#feda75"/>
+            <stop offset="30%" stop-color="#fa7e1e"/>
+            <stop offset="60%" stop-color="#d62976"/>
+            <stop offset="90%" stop-color="#962fbf"/>
+            <stop offset="100%" stop-color="#4f5bd5"/>
+          </radialGradient>
+        </defs>
+        <rect width="24" height="24" rx="6" fill="url(#ig-grad2)"/>
+        <circle cx="12" cy="12" r="5" fill="#fff"/>
+      </svg>
+      <a href="https://instagram.com/alancq1" target="_blank" style="color: #d877a1; font-weight: bold; text-decoration: none;">@alancq1</a>
+
+      <a href="mailto:ecruzquecholac@gmail.com" style="color: #a8e6a2; font-weight: bold; text-decoration: none; margin-left: 8px;">ecruzquecholac@gmail.com</a>
+    </div>
+
+    <h3 style="margin: 20px 0 8px;">Hernandez Soberanes Edgar Noe:</h3>
+    <div style="display: flex; justify-content: center; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 16px; color: #a8e6a2;">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="#25d366" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <circle cx="16" cy="16" r="16"/>
+        <path d="M16 4.484c-6.334 0-11.484 5.15-11.484 11.484a11.37 11.37 0 0 0 1.627 5.877l-1.367 4.982 5.112-1.341a11.488 11.488 0 0 0 5.914 1.604h.003c6.334 0 11.484-5.15 11.484-11.484 0-6.333-5.15-11.482-11.484-11.482z"/>
+      </svg>
+      <a href="https://wa.me/525569572284" target="_blank" style="color: #a8e6a2; font-weight: bold; text-decoration: none;">+52 5569572284</a>
+
+      <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+        <defs>
+          <radialGradient id="ig-grad3" cx="0.5" cy="1" r="1">
+            <stop offset="0%" stop-color="#feda75"/>
+            <stop offset="30%" stop-color="#fa7e1e"/>
+            <stop offset="60%" stop-color="#d62976"/>
+            <stop offset="90%" stop-color="#962fbf"/>
+            <stop offset="100%" stop-color="#4f5bd5"/>
+          </radialGradient>
+        </defs>
+        <rect width="24" height="24" rx="6" fill="url(#ig-grad3)"/>
+        <circle cx="12" cy="12" r="5" fill="#fff"/>
+      </svg>
+      <a href="https://instagram.com/papueddy" target="_blank" style="color: #d877a1; font-weight: bold; text-decoration: none;">@papueddy</a>
+
+      <a href="mailto:hdze363@gmail.com" style="color: #a8e6a2; font-weight: bold; text-decoration: none; margin-left: 8px;">hdze363@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Centros de Acopio CDMX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef8f1;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+    h1, h2 {
+      color: #2e8b57;
+    }
+    .centro {
+      margin: 30px auto;
+      width: 90%;
+      max-width: 700px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .centro:hover {
+      box-shadow: 0 0 20px #3cb371;
+      transform: scale(1.02);
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 2px solid #2e8b57;
+      border-radius: 10px;
+      transition: border-color 0.3s;
+    }
+    iframe:hover {
+      border-color: #3cb371;
+    }
+    p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      color: #2e8b57;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #3cb371;
+      background-color: #eaffea;
+    }
+    button {
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3cb371;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Saludo personalizado y confirmación
+  function bienvenida(){
+    const nombreUser = prompt("Bienvenido a Centros de Acopio CDMX. Por favor, ingresa tu nombre:");
+    if(nombreUser && nombreUser.trim() !== ""){
+      const confirmar = confirm(`Hola ${nombreUser}, ¿quieres ver los centros cercanos a tu ubicación?`);
+      if(confirmar){
+        alert("¡Genial! A continuación verás mapas con algunos de los centros más importantes.");
+      } else {
+        alert("Entendido, puedes explorar la lista a tu ritmo.");
+      }
+    } else {
+      alert("No ingresaste un nombre válido, pero igual puedes explorar los centros.");
+    }
+  }
+
+  bienvenida();
+
+  // Clase para Centros con método para mostrar info
+  class CentroAcopio {
+    constructor(nombre, direccion){
+      this.nombre = nombre;
+      this.direccion = direccion;
+    }
+    getDescripcion(){
+      return `${this.nombre}: ubicado en ${this.direccion}`;
+    }
+  }
+
+  // Array con centros para demo uso
+  const centros = [
+    new CentroAcopio("Centro de Acopio UNAM", "Av. Universidad 3000, Ciudad Universitaria, Coyoacán"),
+    new CentroAcopio("Reciclatrón IPN Zacatenco", "Av. Juan de Dios Bátiz s/n, Lindavista, Gustavo A. Madero"),
+    new CentroAcopio("Centro de Acopio Ajusco Medio", "Prolongación División del Norte 5235, Col. Ajusco Medio, Tlalpan"),
+    new CentroAcopio("Centro de Acopio Miguel Hidalgo", "Parque Lincoln, Polanco, Miguel Hidalgo"),
+    new CentroAcopio("Centro de Acopio Iztapalapa", "Av. Ermita Iztapalapa 1234, Col. El Sifón, Iztapalapa")
+  ];
+
+  // Función que muestra descripción en consola (simula mostrar info extra)
+  function mostrarCentros(){
+    console.log("Listado de Centros de Acopio:");
+    centros.forEach(c => console.log(c.getDescripcion()));
+  }
+
+  mostrarCentros();
+
+  // Eventos onFocus y onBlur para en input búsqueda
+  function focoBuscar(input) {
+    input.style.backgroundColor = "#e0ffe0";
+  }
+  function blurBuscar(input) {
+    input.style.backgroundColor = "white";
+  }
+
+  // Función para filtrar centros según texto (DOM)
+  function filtrarCentros() {
+    const texto = document.getElementById("busqueda").value.toLowerCase();
+    const items = document.querySelectorAll(".centro");
+    items.forEach(item => {
+      const nombreCentro = item.querySelector("h2").textContent.toLowerCase();
+      const direccionCentro = item.querySelector("p").textContent.toLowerCase();
+      if(nombreCentro.includes(texto) || direccionCentro.includes(texto)){
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+</script>
+
+<p>REALIZADO POR: Rojas Valdez Abril, Cruz Quecholac Edgar Alan, Hernandez Soberanes Edgar Noe y Cruz Baez Alizon Michelle</p>
+<h1>Centros de Acopio en la Ciudad de México</h1>
+<p>Ubica los centros de acopio más importantes de la CDMX:</p>
+
+<!-- Búsqueda dinámica -->
+<label for="busqueda">Busca un centro:</label><br/>
+<input type="text" id="busqueda" placeholder="Escribe la Delegación" 
+  onfocus="focoBuscar(this)" onblur="blurBuscar(this)" onkeyup="filtrarCentros()" />
+
+<div class="centro">
+  <h2>Centro de Acopio UNAM</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.158157788695!2d-99.18997718509554!3d19.321234186942733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff8f0bcb1c0f%3A0xa8c678a2c5283c4!2sUniversidad%20Nacional%20Aut%C3%B3noma%20de%20M%C3%A9xico!5e0!3m2!1ses!2smx!4v1695753871999!5m2!1ses!2smx" allowfullscreen></iframe>
+  <p>Av. Universidad 3000, Ciudad Universitaria, Coyoacán</p>
+</div>
+
+<div class="centro">
+  <h2>Reciclatrón IPN Zacatenco</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.249024307087!2d-99.14756348509486!3d19.34734598693325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8618b1f585f%3A0x74d9d9d5bb58b0d3!2sInstituto%20Polit%C3%A9cnico%20Nacional%20-%20Unidad%20Zacatenco!5e0!3m2!1ses!2smx!4v1695753981584!5m2!1ses!2smx" allowfullscreen></iframe>
+  <p>Av. Juan de Dios Bátiz s/n, Lindavista, Gustavo A. Madero</p>
+</div>
+
+<div class="centro">
+  <h2>Centro de Acopio Ajusco Medio</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.7283700791357!2d-99.17406518509638!3d19.275421786961317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce000e5e9738a1%3A0x5c6c74b36c11b4df!2sCentro%20de%20Acopio%20Ajusco%20Medio!5e0!3m2!1ses!2smx!4v1695754072035!5m2!1ses!2smx" allowfullscreen></iframe>
+  <p>Prolongación División del Norte 5235, Col. Ajusco Medio, Tlalpan</p>
+</div>
+
+<div class="centro">
+  <h2>Centro de Acopio Miguel Hidalgo</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.5403120955787!2d-99.19716718509576!3d19.30954308694727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff36edb9cf77%3A0xabc3f4903a75b42c!2sParque%20Lincoln!5e0!3m2!1ses!2smx!4v1695754145637!5m2!1ses!2smx" allowfullscreen></iframe>
+  <p>Parque Lincoln, Polanco, Miguel Hidalgo</p>
+</div>
+
+<div class="centro">
+  <h2>Centro de Acopio Iztapalapa</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.831263468099!2d-99.08944988509598!3d19.300778586950617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff85f96b8a9b%3A0xdccf3f64f2b71e4!2sIztapalapa%2C%20Ciudad%20de%20M%C3%A9xico!5e0!3m2!1ses!2smx!4v1695754204571!5m2!1ses!2smx" allowfullscreen></iframe>
+  <p>Av. Ermita Iztapalapa 1234, Col. El Sifón, Iztapalapa</p>
+</div>
+
+<a href="beneficios.html">➡️ Ir a Beneficios</a>
+<br/>
+<a href="3RS_RC.html">⬅️ Regresar a la página principal</a>
+
+
+</body>
+</html>

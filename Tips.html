@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tips para las 3R</title>
+<style>
+  body {
+    font-family: Arial; 
+    background:#e0ffff; 
+    padding:20px; 
+    color:#333;
+  }
+  header {
+    text-align:center; 
+    color:#1e90ff;
+  }
+  ul {
+    margin-left:20px;
+  }
+  button {
+    margin:10px; 
+    padding:10px 15px; 
+    border:none; 
+    border-radius:5px; 
+    background:#1e90ff; 
+    color:white; 
+    cursor:pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background:#00bfff;
+  }
+  p.tip-superior {
+    background:#f0f8ff; 
+    padding:10px; 
+    border-radius:5px;
+    min-height: 50px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-bottom: 30px;
+  }
+  p.highlight {
+    background-color: #add8e6;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  input[type="text"]:focus {
+    border-color: #1e90ff;
+    background-color: #e6f2ff;
+    outline: none;
+  }
+  .tip-busqueda {
+    background:#e0f7fa;
+    color: #00838f;
+    padding: 12px;
+    margin-top: 18px;
+    border-radius: 6px;
+    min-height: 36px;
+    box-shadow: 0 0 5px #79a7b6;
+    font-weight: bold;
+    font-size: 1.05em;
+    transition: background 0.3s;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Pregunta si desea ver un tip aleatorio al inicio
+  function iniciarTips() {
+    const permiso = confirm("¿Quieres recibir un tip aleatorio sobre las 3R al iniciar esta página?");
+    if(permiso) {
+      mostrarTipAleatorio();
+    }
+  }
+
+  // Tips de los botones
+  const tips = {
+    Reducir: "Compra productos sin empaque y reutiliza bolsas.",
+    Reutilizar: "Dale una segunda vida a objetos antes de tirarlos.",
+    Reciclar: "Separa la basura y lleva reciclables a centros de acopio."
+  };
+
+  // Tips exclusivos solo para el campo de búsqueda
+  const tipsBusqueda = {
+    reducir: "Opta por electrodomésticos de bajo consumo energético.",
+    reutilizar: "Convierte frascos de vidrio en recipientes para guardar especias.",
+    reciclar: "Lava los envases antes de reciclar para facilitar el proceso.",
+    hábitos: "Adquiere el hábito de llevar tu propia botella reutilizable.",
+    creativo: "Usa cartón para hacer organizadores o manualidades ecológicas.",
+    compostaje: "Haz composta casera con restos orgánicos de tu cocina."
+  };
+
+  // Mostrar tip desde botón
+  function mostrarTip(tipo){
+    const mensaje = tips[tipo] || "No tenemos un tip para esa categoría.";
+    const p = document.getElementById("tip-superior");
+    p.textContent = mensaje;
+    p.classList.add("highlight");
+    setTimeout(() => p.classList.remove("highlight"), 800);
+  }
+
+  // Mostrar tip aleatorio para botones
+  function obtenerTipAleatorio(){
+    const keys = Object.keys(tips);
+    const indice = Math.floor(Math.random() * keys.length);
+    return {tipo: keys[indice], mensaje: tips[keys[indice]]};
+  }
+  function mostrarTipAleatorio(){
+    const tip = obtenerTipAleatorio();
+    document.getElementById("tip-superior").textContent = `${tip.tipo}: ${tip.mensaje}`;
+  }
+
+  // Buscar tip exclusivo y mostrarlo abajo
+  function buscarTip(input){
+    const texto = input.value.toLowerCase().trim();
+    let respuesta = "";
+    Object.keys(tipsBusqueda).forEach(clave => {
+      if(texto.includes(clave)) {
+        respuesta = tipsBusqueda[clave];
+      }
+    });
+    if (respuesta === "") {
+      respuesta = "Escribe una palabra clave como 'reducción', 'reutilizar', 'reciclar', 'hábitos', 'creativo' o 'compostaje'.";
+    }
+    const box = document.getElementById("tip-busqueda");
+    box.textContent = respuesta;
+    box.classList.add("highlight");
+    setTimeout(() => box.classList.remove("highlight"), 800);
+  }
+
+  // Ejecutar al cargar
+  window.onload = iniciarTips;
+</script>
+
+<header>
+  <h1>Tips prácticos para implementar las 3R</h1>
+</header>
+
+<button onclick="mostrarTip('Reducir')" onmouseover="this.style.backgroundColor='#0a74da'" onmouseout="this.style.backgroundColor='#1e90ff'">Tip Reducir</button>
+<button onclick="mostrarTip('Reutilizar')" onmouseover="this.style.backgroundColor='#0a74da'" onmouseout="this.style.backgroundColor='#1e90ff'">Tip Reutilizar</button>
+<button onclick="mostrarTip('Reciclar')" onmouseover="this.style.backgroundColor='#0a74da'" onmouseout="this.style.backgroundColor='#1e90ff'">Tip Reciclar</button>
+
+<p id="tip-superior" class="tip-superior">¡Haz clic en un botón para ver un tip!</p>
+
+<section>
+  <h2>Busca un tip escribiendo la palabra clave:</h2>
+  <input type="text" placeholder="Ej: reducir, reutilizar, reciclar, hábitos, creativo, compostaje" oninput="buscarTip(this)" onfocus="this.style.backgroundColor='#e6f2ff'" onblur="this.style.backgroundColor='white'"/>
+  
+  <!-- Nuevo recuadro solo para el tip por búsqueda -->
+  <div id="tip-busqueda" class="tip-busqueda">
+    Aquí aparecerá el tip relacionado con tu búsqueda.
+  </div>
+</section>
+
+<a href="Contactos.html">➡️ Ir a Contactos</a>
+<br/>
+<a href="3RS_RC.html">⬅️ Regresar a la página principal</a>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Beneficios de las 3R</title>
+<style>
+  body {
+    font-family: Arial; 
+    background:#fff8dc; 
+    padding:20px; 
+    color:#333;
+  }
+  header {
+    text-align:center; 
+    color:#ff4500;
+  }
+  section {
+    margin:20px auto; 
+    padding:15px; 
+    max-width:800px; 
+    background:#fff3e0; 
+    border-radius:10px; 
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+  }
+  ul {
+    margin-left:20px;
+  }
+  a {
+    color:#ff4500; 
+    font-weight:bold; 
+    text-decoration:none;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  input:focus {
+    border-color: #ff6347;
+    background-color: #fff0e0;
+    outline: none;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border:none;
+    background-color: #ff4500;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #e03e00;
+  }
+  #mensajePersonalizado {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #d35400;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Reemplazo del alert con función que muestra mensaje inicial de forma creativa
+  function mostrarMensajeInicial(){
+    const contenedor = document.createElement("div");
+    contenedor.style.backgroundColor = "#ffe6cc";
+    contenedor.style.padding = "15px";
+    contenedor.style.borderRadius = "8px";
+    contenedor.style.textAlign = "center";
+    contenedor.style.marginBottom = "20px";
+    contenedor.textContent = "Integrantes: Rojas Valdez Abril, Cruz Quecholac Edgar Alan, Hernandez Soberanes Edgar Noe y Cruz Baez Alizon Michelle - ¡Bienvenido a la página de beneficios!";
+    document.body.insertBefore(contenedor, document.body.firstChild);
+  }
+
+  mostrarMensajeInicial();
+
+  // Clase para representar un beneficio con categoría y descripción
+  class Beneficio {
+    constructor(categoria, descripcion){
+      this.categoria = categoria;
+      this.descripcion = descripcion;
+    }
+    obtenerTexto(){
+      return `${this.categoria}: ${this.descripcion}`;
+    }
+  }
+
+  // Array con beneficios
+  const beneficios = [
+    new Beneficio("Ambientales", "Reducción de contaminación."),
+    new Beneficio("Ambientales", "Conservación de recursos naturales."),
+    new Beneficio("Ambientales", "Menor generación de residuos."),
+    new Beneficio("Sociales", "Mayor conciencia ecológica."),
+    new Beneficio("Sociales", "Promueve hábitos sostenibles en la comunidad."),
+    new Beneficio("Sociales", "Fomenta la educación ambiental en jóvenes y niños."),
+    new Beneficio("Económicos", "Ahorro en consumo de energía y agua."),
+    new Beneficio("Económicos", "Reducción de gastos en productos desechables."),
+    new Beneficio("Económicos", "Generación de oportunidades de empleo en reciclaje."),
+  ];
+
+  // Función para contar beneficios por categoría (uso de sentencia de control)
+  function contarBeneficiosPorCategoria(categoria){
+    let contador = 0;
+    for(let b of beneficios){
+      if(b.categoria.toLowerCase() === categoria.toLowerCase()){
+        contador++;
+      }
+    }
+    return contador;
+  }
+
+  // Mostrar conteo en consola para demo
+  console.log("Beneficios Ambientales:", contarBeneficiosPorCategoria("Ambientales"));
+  console.log("Beneficios Sociales:", contarBeneficiosPorCategoria("Sociales"));
+  console.log("Beneficios Económicos:", contarBeneficiosPorCategoria("Económicos"));
+
+  // Función que da mensaje personalizado según categoría ingresada por usuario
+  function mensajePersonalizado(categoria){
+    let msg= "";
+    switch(categoria.toLowerCase()){
+      case "ambientales":
+        msg = "¡Importante! Los beneficios ambientales ayudan a nuestro planeta a mantenerse sano.";
+        break;
+      case "sociales":
+        msg = "Muy bien, los beneficios sociales impactan positivamente en nuestra sociedad.";
+        break;
+      case "económicos":
+        msg = "Correcto, los beneficios económicos favorecen tu bolsillo y la economía local.";
+        break;
+      default:
+        msg = "Por favor, ingresa una categoría válida: Ambientales, Sociales o Económicos.";
+    }
+    return msg;
+  }
+
+  // Función para manejar clic en botón
+  function evaluarCategoria(){
+    const input = document.getElementById("categoriaInput");
+    const categoria = input.value.trim();
+    const respuesta = mensajePersonalizado(categoria);
+    document.getElementById("mensajePersonalizado").textContent = respuesta;
+  }
+</script>
+
+<header>
+  <h1>Beneficios de aplicar las 3R</h1>
+</header>
+
+<section>
+  <h2>Ambientales</h2>
+  <ul>
+    <li>Reducción de contaminación.</li>
+    <li>Conservación de recursos naturales.</li>
+    <li>Menor generación de residuos.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Sociales</h2>
+  <ul>
+    <li>Mayor conciencia ecológica.</li>
+    <li>Promueve hábitos sostenibles en la comunidad.</li>
+    <li>Fomenta la educación ambiental en jóvenes y niños.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Económicos</h2>
+  <ul>
+    <li>Ahorro en consumo de energía y agua.</li>
+    <li>Reducción de gastos en productos desechables.</li>
+    <li>Generación de oportunidades de empleo en reciclaje.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Prueba tu categoría favorita</h2>
+  <input type="text" id="categoriaInput" placeholder="Escribe: Ambientales, Sociales o Económicos" onfocus="this.style.backgroundColor='#fff0e0'" onblur="this.style.backgroundColor='white'"/>
+  <button onclick="evaluarCategoria()">Evaluar</button>
+  <p id="mensajePersonalizado"></p>
+</section>
+
+<a href="tips.html">➡️ Ir a Tips</a>
+<br/>
+<a href="3RS_RC.html">⬅️ Regresar a la página principal</a>
+
+</body>
+</html>
